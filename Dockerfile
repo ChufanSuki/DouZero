@@ -25,4 +25,4 @@ CMD ["bash", "-c", "poetry run python train.py \
 #   docker build -t douzero .
 #   docker run --name douzero douzero
 # or
-#   docker run --name douzero -it douzero /bin/bash
+#   docker run --runtime=nvidia --gpus all --name douzero -it douzero /bin/bash
