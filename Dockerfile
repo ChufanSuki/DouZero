@@ -3,6 +3,7 @@ FROM nvidia/cuda:11.4.2-runtime-ubuntu20.04
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && apt-get install -y \
+    build-essential \
     python3-pip \
     git
 RUN ln -s /usr/bin/python3 /usr/bin/python
@@ -11,7 +12,8 @@ COPY pyproject.toml pyproject.toml
 RUN pip install poetry --upgrade
 COPY poetry.lock poetry.lock
 RUN poetry install
-
+COPY ./douzero douzero
+COPY train.py train.py
 # Run.
 CMD ["bash", "-c", "poetry run python train.py \
        --gpu_devices 0,1,2,3 \
